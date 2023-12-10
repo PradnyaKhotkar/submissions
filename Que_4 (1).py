@@ -1,5 +1,14 @@
 import pandas as pd
 
+def calculate_toll_rate(df):
+    
+    rate_coefficients = {'moto': 0.8, 'car': 1.2, 'rv': 1.5, 'bus': 2.2, 'truck': 3.6}
+
+    
+    for vehicle_type, rate_coefficient in rate_coefficients.items():
+        df[vehicle_type] = df['distance'] * rate_coefficient
+
+    return df
 
 def generate_car_matrix():
    
@@ -31,4 +40,6 @@ result_matrix = generate_car_matrix()
 
 unrolled_distances = unroll_distance_matrix(result_matrix)
 
-print(unrolled_distances)
+df_with_toll_rates = calculate_toll_rate(unrolled_distances)
+
+print(df_with_toll_rates)
